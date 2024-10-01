@@ -13,3 +13,4 @@ Regarding Computer Vision:
   - algorithm used for object detection
   - When using RGBD data, we need to add another input to the neural network
   - Works very generally by gridding image, bounding boxes, getting rid of boxes with not enough object, and non-max suppression(?).
+- deeplab for wall, floor, etc detection
