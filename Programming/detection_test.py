@@ -5,7 +5,7 @@ import numpy as np
 
 # Load the YOLOv5 model (pre-trained on COCO dataset)
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-#.to('cuda')
+model.to('cuda')
 # Set up the RealSense pipeline
 pipeline = rs.pipeline()
 config = rs.config()
@@ -28,9 +28,9 @@ while True:
     if not color_frame or not depth_frame:
         continue
 
-    # Convert the RGB frame to a numpy array
+    # Convert the RGB frameexit to a numpy array
     color_image = np.asanyarray(color_frame.get_data())
-    cv2.imshow('RealSense', color_image)
+
     # Perform object detection using YOLOv5
     results = model(color_image)
 
