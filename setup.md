@@ -16,3 +16,12 @@ To use an older python version, use "pyenv" on mac and linux and "pyenv-win" on 
 I am currently using Python 3.11.9.
 2. Once you have working version of python "installed",
 install pyrealsense2 "pip install pyrealsense2"
+
+---
+YOLO
+---
+---
+1. Clone repository for desired YOLO model
+2. To install all requirements with "pip install -r requirements.txt"
+3. Ensure correct version of "torch" and "torchvision" are installed to work with Nvidia CUDA
+4. Ensure script is using the GPU
