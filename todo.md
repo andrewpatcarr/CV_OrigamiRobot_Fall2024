@@ -3,5 +3,5 @@
 - implement connection to matlab
 - try newer YOLO model
 - Check reliability of depth readouts from RealSense
-- Look into transfer learning
+- Look into transfer learning for v11
 
