@@ -15,6 +15,8 @@ WINDOWS:
 2. Run the installer
 3. After connecting the camera to the computer, the camera should show up on the Intel RealSense Viewer
 
+note: this step is not necessary to use REALSENSE with python script
+
 Python:
 ---
 1. As of 09/30/2024, pyrealsense2 is not supported with python 3.12. 
