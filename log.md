@@ -14,12 +14,16 @@ Logbook
 - used this to train,didn't take too long (.028 hours), used gpu, results saved to runs/detect/train4
 
 
-    yolo task=detect mode=train model=yolov8s.pt data=data.yaml epochs=20 imgsz=640 device=0 
+    yolo task=detect mode=train model=yolov8s.pt data=data.yaml epochs=20 imgsz=640 device=0
+
+  
 - looks like it has good results for detecting robotic arm
 - now going to validate (need to copy best.pt into programming because giving path was not working)
 
 
-    yolo task=detect mode=val model=best.pt data=data.yaml device=0 
+    yolo task=detect mode=val model=best.pt data=data.yaml device=0
+
+  
 - now going to test model with test images
 - something was wrong in code i inputted and it just used two of the generic photos that yolo has
   which were zidane and bus. it didn't recognize any of them so i think this may have created a full new model off of the small data i had
