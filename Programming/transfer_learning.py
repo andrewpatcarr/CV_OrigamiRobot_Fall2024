@@ -8,4 +8,4 @@ from ultralytics import YOLO
 model = YOLO('yolov8s.pt')
 model.to('cuda')
 
-model.train(data="insert_data.yaml", patience=100)
+model.train(data="data.yaml", patience=100)
