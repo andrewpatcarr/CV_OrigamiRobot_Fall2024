@@ -8,4 +8,5 @@ from ultralytics import YOLO
 model = YOLO('yolov8s.pt')
 model.to('cuda')
 
-model.train(data="data.yaml", patience=100)
+if __name__ == '__main__':
+    model.train(data="data.yaml", epochs=50, imgsz=640)

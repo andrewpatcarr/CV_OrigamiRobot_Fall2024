@@ -6,7 +6,7 @@ Logbook
 ---
 - looked for where i saw yolo architecture which is here [https://www.datacamp.com/blog/yolo-object-detection-explained]()
 - trying out roboflow
-- created training dataset with roboflow off of 31 images of the arm, roboflow allowed augementation of data set to get training data up to 48 images
+- created training dataset with roboflow off of 31 images of the robot arm, labelled photos with robot arm and monitor, roboflow allowed augementation of data set to get training data up to 48 images
 - exported training file, now to try to train pretrained v8s with it
 - found this and going to follow it for tutorial, [https://blog.roboflow.com/how-to-train-yolov8-on-a-custom-dataset/]()
 - above tutorial was not for a python script i think
@@ -34,8 +34,17 @@ Logbook
   I think that if we want to add new classes, robotic-arm or whatever, we will need to still train on a full dataset containing coco and our new object data
 - depending on our use case, we may be able to train new model on just our new data for very specific objects
 - need to look into how long it would take to retrain on COCO and new data, probably need more photos of robotic-arm
-- 
-
+- at lab, trained model would not recognize robot arm or monitor
+- tried yolo v11s, works well
+- going to try to get custom trained dataset to detect things before i try to use coco model with extra pretrained images
+- took 130 photos of keyboards, robot arm, monitors, now going to label and make into dataset, prob need to train for more than 20 epochs
+- labelled 133 photos with keyboard, robot arm, monitor, and mouse, created training set with augmentation for a total of 379 images
+- trying to train in lab, can't access path variable without adminstrative position, trying virtual environment that pycharm gave option to, worked
+- training on new dataset for 50 epochs, took .094 hours, results look stronger, now to try
+- new trained dataset works well, might need to augment to flip photos around to give it a better chance at recognizing things upside down.
+  I did notice that it doesn't work at all angles.
+- still not exactly sure what this is doing, is it transfer learning but only having outputs for the classes that the custom dataset has or training from scratch
+- for now i think this proves that we can train the model to detect specific objects using roboflow for labelling and with enough images
 
 10/11/2024
 ---
