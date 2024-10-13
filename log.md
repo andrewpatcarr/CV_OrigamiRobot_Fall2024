@@ -2,6 +2,21 @@ Logbook
 ---
 ---
 
+10/13/2024
+---
+- starting redesign of origami robot structure and friction pads, need other parts to function better to properly test and get better results
+- going to try printing pads in tpu, also new idea for a one way leverage mechanism that will press into ground in one direction
+- trying new way to connect spring to mount, basically a press fit piece that will go around normal one and press fit the spring in
+- this might allow for better connection and integration of the friction pads
+- getting weird error in solidworks that the piece can't face or plane but won't show me where so hard to fix. Part looks fine so going to ignore for now
+- going to create test piece for testing fitment
+- printing at home out of pla, about 30 min, some parts of design look a little thin, but we'll see
+- going to get my tpu ready to go to try printing out of that, needs to be dried for 24 hours at 50 degC before I can print
+- from looking at print, thicknesses and size of walls and teeth need to be increased
+- looking at paper to try to find thickness of mylar, will probably need to go to lab to test properly, did not find thickness
+- going to work on one way friction press mechanism
+
+
 10/12/2024
 ---
 - looked for where i saw yolo architecture which is here [https://www.datacamp.com/blog/yolo-object-detection-explained]()
