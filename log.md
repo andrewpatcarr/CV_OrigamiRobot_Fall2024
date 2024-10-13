@@ -15,7 +15,7 @@ Logbook
 - from looking at print, thicknesses and size of walls and teeth need to be increased
 - looking at paper to try to find thickness of mylar, will probably need to go to lab to test properly, did not find thickness
 - going to work on one way friction press mechanism
-  ![new_friction_pad.jpg](new_friction_pad.jpg)
+  ![new_frcition_idea](new_friction_idea.jpg)
 
 
 10/12/2024
