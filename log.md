@@ -20,8 +20,15 @@ Logbook
   ![paper_fit_test](log_photos/paper_fit_test.jpeg)
 - printing new version (larger teeth, thicker walls, filet on corner) and going to test with mylar spring, 32 min print, pla
 - here's what the new clamp design looks like in solidworks ![new_clamp_solidworks](log_photos/solidworks_clamp_idea.png)
-
-
+- new test piece did not fit together well, some parts were too tight, giving it more clearance and going to try again
+- pretty sure problem was that the extra clearance given was only going to one side since location of tooth dimension was on one side, 
+  so adjusted location such that it has .2 mm clearance on each side
+- giving .2 mm clearance on each side of tooth, .4 mm at top of tooth; 
+  outer diam of inner clamp is 52.78 mm, inner diam of outer clamp is 53.5 mm ~~ .75/2 == .38 mm clearance between clamp
+- in the worm assembly, lined up the clamps to make sure everything looked right, found that the teeth were not alligned correctly,
+  eventually found that it was one location dimension that was on attached to wrong wall
+- made outer clamp thicker so it will deflect less, printing new test
+- here's what spacing looks like ![clamp_spacing_1](log_photos/fit_spacing_1.png)
 
 10/12/2024
 ---
