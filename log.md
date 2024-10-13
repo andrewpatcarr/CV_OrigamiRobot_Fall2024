@@ -18,6 +18,7 @@ Logbook
   ![new_frcition_idea](new_friction_idea.jpg)
 
 
+
 10/12/2024
 ---
 - looked for where i saw yolo architecture which is here [https://www.datacamp.com/blog/yolo-object-detection-explained]()
