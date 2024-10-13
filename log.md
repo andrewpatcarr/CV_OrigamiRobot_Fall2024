@@ -42,7 +42,7 @@ Logbook
 - trying to train in lab, can't access path variable without adminstrative position, trying virtual environment that pycharm gave option to, worked
 - training on new dataset for 50 epochs, took .094 hours, results look stronger, now to try
 - new trained dataset works well, might need to augment to flip photos around to give it a better chance at recognizing things upside down.
-  I did notice that it doesn't work at all angles.
+  I did notice that it doesn't work at all angles. Only tested on keyboard, monitor and mouse, robotic arm is far from camera when attached to pc
 - still not exactly sure what this is doing, is it transfer learning but only having outputs for the classes that the custom dataset has or training from scratch
 - for now i think this proves that we can train the model to detect specific objects using roboflow for labelling and with enough images
 
