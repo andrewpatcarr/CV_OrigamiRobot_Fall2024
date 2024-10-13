@@ -18,6 +18,8 @@ Logbook
   ![new_friction_idea](log_photos/new_friction_idea.jpg)
 - fit test worked pretty well, might need to try some different spacings, new version will be stiffer too
   ![paper_fit_test](log_photos/paper_fit_test.jpeg)
+- printing new version (larger teeth, thicker walls, filet on corner) and going to test with mylar spring, 32 min print, pla
+- here's what the new clamp design looks like in solidworks ![new_clamp_solidworks](log_photos/solidworks_clamp_idea.png)
 
 
 
