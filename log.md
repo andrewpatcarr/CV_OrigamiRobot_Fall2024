@@ -2,6 +2,19 @@ Logbook
 ---
 ---
 
+10/14/2024
+---
+- went to lab to test and saw that the springs edges are not just squares,
+  there is a flat fold sticking up on top right/left of the robot,
+  will need to adjust design
+- going to bring robot home so i can design things for it better
+- though of better way to connect friction pads using the flexibility of tpu
+- tpu friction pad print went well, much more flexible but maybe too much
+- looking at windup system on the servo for cable, needs to be better and I have an idea in mind;
+  I think its important that the mechanisms for the robot are well designed so that proper testing can happen,
+  hard to trust results when many other factors could be affecting results.
+
+
 10/13/2024
 ---
 - starting redesign of origami robot structure and friction pads, need other parts to function better to properly test and get better results
