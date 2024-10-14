@@ -29,6 +29,12 @@ Logbook
   eventually found that it was one location dimension that was on attached to wrong wall
 - made outer clamp thicker so it will deflect less, printing new test
 - here's what spacing looks like ![clamp_spacing_1](log_photos/fit_spacing_1.png)
+- started working on geometry so that clamp will lock into place and not slip off, 
+  trying one wall that it won't go past and one chamfered less deep wall that it can deflect through and then be locked into place
+- printing test of this, tpu has been drying for about 10 hours, might try to print one of each for testing
+- trying the original 'flexure design' and a flexure design with less legs and more spacing to hopefully allow more deflection and surface area touching; like this:
+![flexure_with_less](log_photos/flexure_with_less.png)
+
 
 10/12/2024
 ---
