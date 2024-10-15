@@ -83,7 +83,7 @@ Logbook
 - tried it on one of the test images and it did not work either, didn't show any boxes at all
 - going to try a live detection test just in room to see if it is custom with pretrained or custom based off my dataset
 - live test showed showed no boxes or object detection, pretty sure i just trained new model from scratch
-- after reading some of the discussion on this [https://www.reddit.com/r/computervision/comments/16q1csv/is_it_possible_to_add_new_classes_to_pretrained/]()
+- after reading some of the discussion on this [https://www.reddit.com/r/computervision/comments/16q1csv/is_it_possible_to_add_new_classes_to_pretrained/](https://www.reddit.com/r/computervision/comments/16q1csv/is_it_possible_to_add_new_classes_to_pretrained/)
   I think that if we want to add new classes, robotic-arm or whatever, we will need to still train on a full dataset containing coco and our new object data
 - depending on our use case, we may be able to train new model on just our new data for very specific objects
 - need to look into how long it would take to retrain on COCO and new data, probably need more photos of robotic-arm
