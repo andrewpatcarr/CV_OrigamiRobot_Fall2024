@@ -13,6 +13,12 @@ Logbook
 - looking at windup system on the servo for cable, needs to be better and I have an idea in mind;
   I think its important that the mechanisms for the robot are well designed so that proper testing can happen,
   hard to trust results when many other factors could be affecting results.
+- measuring mylar with verniers shows a thickness of 0.4mm; currently printing new version with slot but spacing might be too aggressive
+- added new way of sliding friction pad into place, then realized that I could now have the friction pad be more centered under the mount;
+  might increase friction and performance
+- fit test worked with walls; pretty tight but gives it a much more stable feel and look; allows the origami spring to only act as spring and not interact with ground
+![fit_test_walls](log_photos/fit_test_walls.jpg)
+- printing updated clamp and servo mount to reassemble robot; once this print is done, will print friction pad that will fit in new system
 
 
 10/13/2024
