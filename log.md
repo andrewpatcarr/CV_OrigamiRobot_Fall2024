@@ -2,6 +2,12 @@ Logbook
 ---
 ---
 
+10/15/2024
+---
+- working on 3D printable servo horn pulley; found cad file of servo on internet; designed horn off of other shaft
+- here's what the first edition looks like in solidworks, also cut out a slot so servo will sit properly
+![servo_pulley_one](log_photos/servo_pulley_horn_one.png)
+- printer can do resolution ![pulley_print](log_photos/pulley_print.png)
 10/14/2024
 ---
 - went to lab to test and saw that the springs edges are not just squares,
