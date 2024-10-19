@@ -2,6 +2,19 @@ Logbook
 ---
 ---
 
+10/18/2024
+---
+- original idea for friction pads did not work as intended, pulley printed was too tight of tolerances for hole and connection teeth
+- some new ideas for both of those: put hole through center of pulley section so I can pull thread through and put screw in to lock it into place
+- for the friction pad: Create a way to just slide it in but have the friction pad be extra thick so only friction pad part will interact with ground
+- going to cad it up
+- new pulley: ![new_pulley](log_photos/new_pulley.png)
+- new friction pad mount on clamp: ![new_outclamp](log_photos/new_outclamp.png)
+- new friction pad, trying to make ridges stronger, and new clamp system: ![new_frictpad](log_photos/new_frictpad.png)
+- increased inner wall dimension on clamp to make it a little easier for it to clamp
+- going to print and test
+
+
 10/15/2024
 ---
 - working on 3D printable servo horn pulley; found cad file of servo on internet; designed horn off of other shaft
