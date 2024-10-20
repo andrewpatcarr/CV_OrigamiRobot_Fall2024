@@ -2,6 +2,20 @@ Logbook
 ---
 ---
 
+
+10/19/2024
+---
+- Print failed last night, pretty sure it was a surface grip problem but so going to reglue and try again
+- found an error on my pulley part that may have made the print fail; I changed a diameter that another was based on but didn't update other side
+- new way for attaching thread to pulley works very well; struggling to print out the teeth good enough to properly attach to servo
+- trying some smaller outer diameter of teeth section
+- trying to download a smaller version of coco to try transfer learning based on this [tutorial](https://github.com/ultralytics/yolov5/issues/1314)
+- need to combine custom dataset with new object; curious what will happen if i have more than one of the same class
+- new outer tooth diameter worked, 4.7 mm. Pulley system seems like it will work well
+- updated servo mount to be stronger and fit the servo better: ![new_servo_mount](log_photos/new_servo_mount.png)
+- adding a screw into place method for tightening other side of thread to servo mount
+
+
 10/18/2024
 ---
 - original idea for friction pads did not work as intended, pulley printed was too tight of tolerances for hole and connection teeth
