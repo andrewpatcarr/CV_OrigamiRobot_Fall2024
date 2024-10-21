@@ -2,6 +2,19 @@ Logbook
 ---
 ---
 
+10/20/2024
+---
+- all parts printed, going to assemble robot
+- when trying to put clamp on, discovered that I didn't change the outer diameter dimension of servo mount so did not work; fixed it and printing new one, which will be an hour
+- tried to get smaller cocodataset but some of the options that were posted would not download for me; going to keep looking
+- Tried to download from this [repo](https://github.com/nightrome/cocostuff10k?tab=readme-ov-file) which I think it legitamate but outdated
+- trying to download from this [dataset ninja](https://datasetninja.com/cocostuff10k#download) but wasn't working in a similar way to the above repo but can install from a python package so trying that.
+  Above did not work, python script showed I was missing package but I followed instructions on website and didn't mention anything about it
+- Dataset ninja download for supervisely format dataset worked and Roboflow can take supervisely formatted files
+- Uploading to roboflow but learned only allowed to have 10,000 total so have to get rid of about 300. Hopefully doesn't make some of the annotations not work. Looks like it might take a bit, roughly 4 hours
+- another error on the position of the tabs of the servo mount. Confident I fixed this time by making assembly in solidworks of actual pieces instead of test pieces. Going to reprint
+- fitment test looks like this: ![fitment_show](log_photos/fitment_show.png)
+
 
 10/19/2024
 ---
