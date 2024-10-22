@@ -2,6 +2,13 @@ Logbook
 ---
 ---
 
+10/21/2024
+---
+- all robot structure parts printed; assembled it from scratch in about 35 minutes; everything seems to be in right order
+![](log_photos/IMG_1474.jpeg) ![](log_photos/IMG_1475.jpeg) ![](log_photos/IMG_1476.jpeg)![](log_photos/IMG_1479.jpeg)
+- the plastic threads of the servo horn screw seem to be stripped on one of the servo which is partly how I tighten the thread into place. If this reoccurs as a problem, I may need to redesign
+- going to print the new tpu pads to see how they work/fit into mount
+
 10/20/2024
 ---
 - all parts printed, going to assemble robot
@@ -14,7 +21,7 @@ Logbook
 - Uploading to roboflow but learned only allowed to have 10,000 total so have to get rid of about 300. Hopefully doesn't make some of the annotations not work. Looks like it might take a bit, roughly 4 hours
 - another error on the position of the tabs of the servo mount. Confident I fixed this time by making assembly in solidworks of actual pieces instead of test pieces. Going to reprint
 - fitment test looks like this: ![fitment_show](log_photos/fitment_show.png)
-
+- this is what it looks like assembled in solid works (except servo is actually rotated 90deg so need to fix mates): ![assembled_1](log_photos/assembled_1.png)
 
 10/19/2024
 ---
