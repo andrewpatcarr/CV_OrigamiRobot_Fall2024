@@ -2,6 +2,15 @@ Logbook
 ---
 ---
 
+10/23/2024
+---
+- adjusted thickness of frcition pad slider to 1.2 mm; tested and it was too thin; put it to 1.3 mm and tested; tight fit but still easy to get in, could be a hair too thin but for the strenfth of the servos and expected friction, it should be fine
+- going to test on the arduino
+- in the future, changing to dc motor with encoder, motor driver could increase performance drastically; especially for speed and accurate rotation
+- in testing, one of the pulleys started to slip where the teeth connect. Going to try printing it out of nylon
+- did some of a csu training i need to do
+
+
 10/21/2024
 ---
 - all robot structure parts printed; assembled it from scratch in about 35 minutes; everything seems to be in right order
