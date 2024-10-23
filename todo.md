@@ -3,3 +3,5 @@
 - implement connection to matlab (working, but with python taking data from wrapper and sending over)
 - try newer YOLO model (v8 only has pretrained models)
 - Look into transfer learning for v8
+
+- take photo of stuff in lab for base comparison for pretrained, custom trainied and freeze
