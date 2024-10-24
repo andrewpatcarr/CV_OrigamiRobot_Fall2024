@@ -2,14 +2,94 @@ Logbook
 ---
 ---
 
+
 10/23/2024
 ---
-- adjusted thickness of frcition pad slider to 1.2 mm; tested and it was too thin; put it to 1.3 mm and tested; tight fit but still easy to get in, could be a hair too thin but for the strenfth of the servos and expected friction, it should be fine
+- adjusted thickness of friction pad slider to 1.2 mm; tested and it was too thin; put it to 1.3 mm and tested; tight fit but still easy to get in, could be a hair too thin but for the strenfth of the servos and expected friction, it should be fine
 - going to test on the arduino
 - in the future, changing to dc motor with encoder, motor driver could increase performance drastically; especially for speed and accurate rotation
 - in testing, one of the pulleys started to slip where the teeth connect. Going to try printing it out of nylon
 - did some of a csu training i need to do
+- nylon gear did not print accurately enough to have teeth; going to print another pla one for now
+- 10k dataset uploaded to roboflow but none of the photos have annotations. Might need to reupload to roboflow again, cause it took a while and I went to sleep before
+- going to get a test photo going, might get a better one from lab with many photos tomorrow
 
+code used:
+
+
+    yolo detect  predict model=yolo11n.pt source='"C:\Users\Andrew Carr\Downloads\CV_OrigamiRobot_Fall2024\Object Photos\comparison_image2.jpeg"'
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 3px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 300px; /* Adjust size as needed */
+            height: auto;
+        }
+        .row-header {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Model Image Comparison</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Image #</th> <!-- Empty cell for top-left corner -->
+            <th>11s</th>
+            <th>11n</th>
+            <th>custom</th>
+            <th>to be freeze</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>1</th>
+            <td><img src="Programming/runs_compare1/detect/predict/comparison_image1.jpeg" alt="Model 1 - Image 1"></td>
+            <td><img src="Programming/runs_compare1/detect/predict2/comparison_image1.jpeg" alt="Model 2 - Image 1"></td>
+            <td><img src="Programming/runs_compare1/detect/predict3/comparison_image1.jpeg" alt="Model 3 - Image 1"></td>
+            <td><img src="image1_model4.jpg" alt="Model 4 - Image 1"></td>
+        </tr>
+        <tr>
+            <th>2</th>
+            <td><img src="Programming/runs_compare1/detect/predict6/comparison_image2.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict7/comparison_image2.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict4/comparison_image2.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="image2_model4.jpg" alt="Model 4 - Image 2"></td>
+        </tr>
+        <tr>
+            <th>3</th>
+            <td><img src="Programming/runs_compare1/detect/predict9/comparison_image3.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict8/comparison_image3.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict10/comparison_image3.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="image2_model4.jpg" alt="Model 4 - Image 2"></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
 
 10/21/2024
 ---
@@ -181,3 +261,37 @@ Before 10/10/2024 (generally, at least what I can remember)
 - checked depth readings, pretty accurate 
 - got yolo v5 working with camera based on ultralytics github and chatgpt information, detection_test.py
 - started setup.md for how to get stuff started
+
+
+
+Random old stuff:
+
+old way before table:
+
+
+Comparison image 1
+-using yolo11x.pt (biggest one, only going to do for image 1 cause not significantly different from 11s):
+<img src="runs/detect/predict11/comparison_image1.jpeg" width="400">
+- using yolo11s.pt:
+<img src="runs/detect/predict/comparison_image1.jpeg" width="400">
+- using yolo11n.pt:
+<img src="runs/detect/predict2/comparison_image1.jpeg" width="400">
+- using custom trained dataset on stuff in lab
+<img src="runs/detect/predict3/comparison_image1.jpeg" width="400">
+
+Comparison image 2
+- using yolo11s.pt:
+<img src="runs/detect/predict6/comparison_image2.jpeg" width="400">
+- using yolo11n.pt:
+<img src="runs/detect/predict7/comparison_image2.jpeg" width="400">
+- using custom trained dataset on stuff in lab
+<img src="runs/detect/predict4/comparison_image2.jpeg" width="400">
+
+Comparison image 3
+- using yolo11s.pt:
+<img src="runs/detect/predict9/comparison_image3.jpeg" width="400">
+- using yolo11n.pt:
+<img src="runs/detect/predict8/comparison_image3.jpeg" width="400">
+- using custom trained dataset on stuff in lab
+<img src="runs/detect/predict10/comparison_image3.jpeg" width="400">
+
