@@ -2,6 +2,37 @@ Logbook
 ---
 ---
 
+10/27/2024
+---
+CV Stuff (since a lot written about both sides of project today)
+- coco dataset upload failed on roboflow, need to delete whole project to upload more photos with free plan
+- Tested friction pad with robot on carpet, worked for a second but then got stuck with the back sliding back and forth. The pulleys keep slipping, I think it would be worth it to switch to DC motors. Also, thought of an update to the pulley so that the thread won't come off when there is not tension. Going to make it enclosed where the pulley is
+- Uploaded dataset to roboflow again, but it looks like they don't have the correct annotations again. Uploading them and going to see if they do after uploading. If not, might need to find a different dataset. Either way, I am going to try to freeze train with other dataset with limited classes and see if it keeps COCO classes
+- Annotations did not work
+- Did some more research into freeze training on newer models of YOLO. Most of the information on freezing layers and retraining final layers was for older outdated YOLO models. Now that you can just pip install ultralytics and have everything you need to use new YOLO models, its different to freeze layers and train. Going to keep looking into it
+- in the "[train](https://docs.ultralytics.com/modes/train/#train-settings)" documentation, there is an argument "freeze" that freezes the first N layers of the model by index. I should be able to use this for our purpose, just need a good dataset
+- looking at this [discussion](https://github.com/orgs/ultralytics/discussions/3862), it should be possible to do freeze and then train. One ultralytics moderator said that it is not completely necessary to freeze the backbone to add classes to coco. If i can get a good coco 10k or 5k dataset, I should be able to try both of these. Some of it is still quite confusing on how to actually do any of this successfully.
+- found [this](https://www.kaggle.com/datasets/bardiaardakanian/mmsample?resource=download) 5k dataset which (if it works), should be good enough for testing if freezing works and is useful
+- Going to make a new dataset of robotic-arm oriented photos and label with COCO labels and then robotic-arm
+
+Worm Robot Stuff
+- printing new pla pulley; if doesn't work, I'm going to look into small geared dc motors with encoders
+- pla pulley had better teeth connection this time, used a different, longer m2 bolt that threads in better and locks better; going to test movement
+- put dataset into roboflow, looks like it has labels this time, but it ended up being 10,000 images because there were 5000 for train and 5000 for validation. To add robotic arm photos, I'll need to delete some of the images unless we upgrade our roboflow plan.
+- Looking at small geared dc motors, need to be <40mm in full length to fit. Center of pulley needs to be around 37 mm from far side of servo mount. This [one](https://www.amazon.com/dp/B07FVRL4SW/ref=sspa_dk_detail_1?pd_rd_i=B07FVRL4SW&pd_rd_w=78QHg&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=870TECVJGDSBPF2WMFWJ&pd_rd_wg=7XzXS&pd_rd_r=3dd5ef8f-e3b5-401c-ae37-ec0c6e805fc9&s=industrial&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1) is a possibility.
+  The one linked is 500 rpm  with .15kg-cm rated torque. According to [this](https://www.amazon.com/FEETECH-Continuous-Rotation-Helicopter-Airplane/dp/B097SZQ4CH/ref=sr_1_1_sspa?crid=1J1SA1A439XYF&dib=eyJ2IjoiMSJ9.x3ruvBhPIHRUU8DniCyuas-rMHU1QUZu4-17Uj3CuBOxEWp52GaddqeDwzKQGaIfw4umw50vRZNfBEDu_OgsG89e1QX3bjMpx2o4HZt-71J4gd8jjujp-HOwHXag4LG3Pqlv6hlJw22tWZhlldXkZMQnOlmKpKStGRqSt5i8F3mCYxRzV2GVuFWaYUR_XGNo1KBzsP7b6cWRypa-Z6FTjarKc3IcZj-FMWhdtl1gh6JOVj3caFx0htsgRr8XdMku8ISvEOOcazT8_hWA49CTVqWkWvoq8BS7nTLvKkqFAIs.0FCAyKqtTzNlQQO5Tj_d3zshuoaL4Rv_NgFECHNtxVg&dib_tag=se&keywords=ft90r%2Bservo&qid=1730067167&sprefix=ft90r%2B%2Caps%2C174&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1), the current servos only provide stall torque which is 1.5 kg-cm.
+- Thinking if we are to get better motors, we should also try to maximize performance for future changes and use cases
+- Quick calc for required torque with pulley diameter: 
+
+![motor_torque_calc](log_photos/motor_torque_calc.jpg)
+
+(if this is too small, it is [here](log_photos/motor_torque_calc.jpg))
+
+- after that calc, the motor does not need anything close to 500 rpm. Under 60 will be good (future extra speed); should allow for a very high torque but small motor
+- there are many good dc motor options (like [this](https://www.amazon.com/Hilitand-Brush-Geared-1218GE%E2%80%91N20-Reduction/dp/B08LLCL97S/ref=sxin_15_pa_sp_search_thematic_sspa?content-id=amzn1.sym.76d54fcc-2362-404d-ab9b-b0653e2b2239%3Aamzn1.sym.76d54fcc-2362-404d-ab9b-b0653e2b2239&crid=1AF17BYBASFRN&cv_ct_cx=small%2Bdc%2Bgeared%2Bmotor&dib=eyJ2IjoiMSJ9.x1rnJkEYoz8yC6Q-5UP1hW6ln3vOfs7MsP-GD5bmf0JWxFV3u-5lNjShBJtRq_KepS5a6pt28fsZE6sI1CgWWA.boM7gIpmu_hBg_PITGBl2ZHSo10VE29hCTtMPDOObPw&dib_tag=se&keywords=small%2Bdc%2Bgeared%2Bmotor&pd_rd_i=B08LL9TF91&pd_rd_r=4fc257f9-552f-40da-8446-d4000ce5cce3&pd_rd_w=qYPYu&pd_rd_wg=LnlGc&pf_rd_p=76d54fcc-2362-404d-ab9b-b0653e2b2239&pf_rd_r=0HB4NT7GEDQVCAVH0D56&qid=1730071380&s=industrial&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=small%2Bdc%2Bgeared%2Bmoto%2Cindustrial%2C144&sr=1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM&th=1), but getting one with an encoder is difficult. May be able to use an optical speed sensor but could be difficult to incorporate
+- [This](https://www.amazon.com/dp/B07N18S3M3/ref=twister_B0BPM11WG6?_encoding=UTF8&th=1) looks good, but has no information on torque, pps, or dimensions so pretty sketchy
+- A potentiometer type encoder could work but unsure if something like [this](https://www.amazon.com/uxcell-Encoder-Digital-Potentiometer-D-Shaft/dp/B07R9LSWTP/ref=sr_1_3?crid=MC2D0C3DAEFT&dib=eyJ2IjoiMSJ9.x0x7SwgdHGSnh9lJB8DAnHIzKELV3ykEiat343HAZ40QAc4ZlyxZcj13Q9T-MryXmwh7UbvYEaoAmpkxN7TmN9c3q1pN8qu1gUlWsTAIJmJZ43UmdC602Wynwde9UdlfyUlFtWLYPvLcOYRKocdIrsD0_jpAeBXHBppeDcsPXeOElp6_zOO2CwZ7jK6lyIADHiHPB2Eztv39ohclUPuHoasOSAkGoD8RL_HzV1dELNc0qmBt_2XCvLn2OnV9DhNpb-95n_-vn_Ka0sDP5Z6O-tfJjzKXe8FsATJiPdf_eO4.fCZaGkP8xtoTp-fQuK307nioSRxmX2WkjHz1rb3UKbc&dib_tag=se&keywords=hall+effect+encoder+for+3mm+d+shaft&qid=1730072620&s=industrial&sprefix=hall+effect+encoder+for+3mm+d+shaft%2Cindustrial%2C144&sr=1-3) is continous rotation or not
+
 
 10/23/2024
 ---
