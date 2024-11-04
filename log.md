@@ -22,7 +22,7 @@ Logbook
 
 Video of test:
 
-[joystick_assem_test]([log_photos/joystick_assem_test.MOV](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/EaTgc_oRwHBKrTsXxgcHwpsBTS4aR1mzuO3mRuU0t0Zwog?e=ipvDhO&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D))
+[joystick_assem_test](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/EaTgc_oRwHBKrTsXxgcHwpsBTS4aR1mzuO3mRuU0t0Zwog?e=ipvDhO&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 <!DOCTYPE html>
 <html lang="en">
