@@ -7,12 +7,20 @@ Logbook
 - 10 epochs took 9.31 hours. Inference time went down significantly from 1 epoch train (~90 ms to 5.8 ms). As seen in table, the model only detecting robot arm in one of the photos. Most likely due to incomplete data and maybe not enough angles. Performance of other objects was decent considering this is far less images than full COCO dataset
 - cleaned up wiring on arduino and current sensor as much as possible
 - found a joystick module and created new script to control the worm using it. It allows pure compression/decompression as well as turning commands. Should make it much easier to test and use
-- Looks like this: ![joystick_module](log_photos/joystick_module.jpg)
+- Looks like this: 
+
+![joystick_module](log_photos/joystick_module.jpg)
 - going to design a base for joystick module and top so its easier to use and control
 - base and joystick top created and being printed now
 - made this joystick transmission thing so its easier to go dead straight and to a pure turn
 
 ![joystick_transmission](log_photos/joystick_transmission.png)
+
+- transmission looks cooler than it actually works but still is good for guiding turn:
+
+![real_life_joystick_assem](log_photos/real_life_joystick_assem.jpg)
+
+Video of test:
 
 
 <!DOCTYPE html>
