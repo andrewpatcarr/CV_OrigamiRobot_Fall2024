@@ -22,6 +22,7 @@ Logbook
 
 Video of test:
 
+[joystick_assem_test](log_photos/joystick_assem_test.MOV)
 
 <!DOCTYPE html>
 <html lang="en">
