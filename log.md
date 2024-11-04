@@ -2,6 +2,111 @@ Logbook
 ---
 ---
 
+11/3/2024
+---
+- 10 epochs took 9.31 hours. Inference time went down significantly from 1 epoch train (~90 ms to 5.8 ms). As seen in table, the model only detecting robot arm in one of the photos. Most likely due to incomplete data and maybe not enough angles. Performance of other objects was decent considering this is far less images than full COCO dataset
+- cleaned up wiring on arduino and current sensor as much as possible
+- found a joystick module and created new script to control the worm using it. It allows pure compression/decompression as well as turning commands. Should make it much easier to test and use
+- Looks like this: ![joystick_module](log_photos/joystick_module.jpg)
+- going to design a base for joystick module and top so its easier to use and control
+- base and joystick top created and being printed now
+- made this joystick transmission thing so its easier to go dead straight and to a pure turn
+
+![joystick_transmission](log_photos/joystick_transmission.png)
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 3px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 300px; /* Adjust size as needed */
+            height: auto;
+        }
+        .row-header {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Model Image Comparison</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Image #</th> <!-- Empty cell for top-left corner -->
+            <th>11s</th>
+            <th>11n</th>
+            <th>4 class custom</th>
+            <th>COCO+Robotic-arm off 11s</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>1</th>
+            <td><img src="Programming/runs_compare1/detect/predict/comparison_image1.jpeg" alt="Model 1 - Image 1"></td>
+            <td><img src="Programming/runs_compare1/detect/predict2/comparison_image1.jpeg" alt="Model 2 - Image 1"></td>
+            <td><img src="Programming/runs_compare1/detect/predict3/comparison_image1.jpeg" alt="Model 3 - Image 1"></td>
+            <td><img src="Programming/runs/detect/predict4/comparison_image1.jpeg" alt="Model 4 - Image 1"></td>
+        </tr>
+        <tr>
+            <th>2</th>
+            <td><img src="Programming/runs_compare1/detect/predict6/comparison_image2.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict7/comparison_image2.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict4/comparison_image2.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="Programming/runs/detect/predict5/comparison_image2.jpeg" alt="Model 4 - Image 2"></td>
+        </tr>
+        <tr>
+            <th>3</th>
+            <td><img src="Programming/runs_compare1/detect/predict9/comparison_image3.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict8/comparison_image3.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/runs_compare1/detect/predict10/comparison_image3.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="Programming/runs/detect/predict6/comparison_image3.jpeg" alt="Model 4 - Image 2"></td> 
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+
+
+11/2/2024
+---
+CV stuff
+- going to label new robotic-arm photos to finish rest of the dataset; added 101 photos with robotic-arms in them
+- new dataset has 81 classes, 20413 photos for training, 1982 for validation, 990 for testing after augmentation
+- going to train model from scratch first, then freeze train with same dataset to get an idea of time and quality differences
+- ran a training for only 1 epoch to get a sense of how long it will take to train, and how good 1 epoch will train the set. Looks like its going to take roughly an hour. At home, there are 1274 iterations per epoch at 8.5G of GPU mem.
+- with 1 epoch (train9), it did not recognize the robotic-arm, I'm going to train for 10 epochs overnight
+- it says this when the training starts, so I think it is automatically doing freeze training when a model is inputted as part of the train command:
+
+![freeze_training_maybe](log_photos/transfer_learning_maybe.png)
+
+Only referring to the top two lines in screenshot
+
+this is the code I used for this
+
+    yolo task=detect mode=train model=yolo11s.pt data=COCO_robotic_trainingset\data.yaml epochs=10 imgsz=640 device=0
+
+
 10/27/2024
 ---
 CV Stuff (since a lot written about both sides of the project today)
@@ -60,76 +165,7 @@ code used:
     yolo detect  predict model=yolo11n.pt source='"C:\Users\Andrew Carr\Downloads\CV_OrigamiRobot_Fall2024\Object Photos\comparison_image2.jpeg"'
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Comparison Table</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 3px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        img {
-            width: 300px; /* Adjust size as needed */
-            height: auto;
-        }
-        .row-header {
-            background-color: #f9f9f9;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
 
-<h2>Model Image Comparison</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Image #</th> <!-- Empty cell for top-left corner -->
-            <th>11s</th>
-            <th>11n</th>
-            <th>custom</th>
-            <th>to be freeze</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>1</th>
-            <td><img src="Programming/runs_compare1/detect/predict/comparison_image1.jpeg" alt="Model 1 - Image 1"></td>
-            <td><img src="Programming/runs_compare1/detect/predict2/comparison_image1.jpeg" alt="Model 2 - Image 1"></td>
-            <td><img src="Programming/runs_compare1/detect/predict3/comparison_image1.jpeg" alt="Model 3 - Image 1"></td>
-            <td><img src="image1_model4.jpg" alt="Model 4 - Image 1"></td>
-        </tr>
-        <tr>
-            <th>2</th>
-            <td><img src="Programming/runs_compare1/detect/predict6/comparison_image2.jpeg" alt="Model 1 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict7/comparison_image2.jpeg" alt="Model 2 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict4/comparison_image2.jpeg" alt="Model 3 - Image 2"></td>
-            <td><img src="image2_model4.jpg" alt="Model 4 - Image 2"></td>
-        </tr>
-        <tr>
-            <th>3</th>
-            <td><img src="Programming/runs_compare1/detect/predict9/comparison_image3.jpeg" alt="Model 1 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict8/comparison_image3.jpeg" alt="Model 2 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict10/comparison_image3.jpeg" alt="Model 3 - Image 2"></td>
-            <td><img src="image2_model4.jpg" alt="Model 4 - Image 2"></td>
-        </tr>
-    </tbody>
-</table>
-
-</body>
-</html>
 
 10/21/2024
 ---
