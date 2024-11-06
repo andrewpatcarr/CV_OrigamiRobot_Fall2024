@@ -2,6 +2,15 @@ Logbook
 ---
 ---
 
+11/5/2024
+---
+- created some new friction pad ideas, going to print later and test if i can get a pulley to work on the servo.
+- two are thinner versions of original. The rest of them are cut out designs based on the thinner version of current
+
+![friction_pad_ideas](log_photos/friction_pad_ideas.png)
+
+
+
 11/3/2024
 ---
 - 10 epochs took 9.31 hours. Inference time went down significantly from 1 epoch train (~90 ms to 5.8 ms). As seen in table, the model only detecting robot arm in one of the photos. Most likely due to incomplete data and maybe not enough angles. Performance of other objects was decent considering this is far less images than full COCO dataset
