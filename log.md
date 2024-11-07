@@ -2,6 +2,28 @@ Logbook
 ---
 ---
 
+11/6/2024
+---
+- drying the spool of tpu and going to print some new friction pads to try out
+- got a pulley to work again, printed at .12 mm layer height; I'm pretty sure this means more precision on the teeth of the pulley
+- read [research article](https://www.researchgate.net/profile/Kazim-Raza-5/publication/339640242_Fast_and_Accurate_Fish_Detection_Design_with_Improved_YOLO-v3_Model_and_Transfer_Learning/links/5e707084a6fdccc06e94b160/Fast-and-Accurate-Fish-Detection-Design-with-Improved-YOLO-v3-Model-and-Transfer-Learning.pdf)
+but did not find much on how they did their transfer learning. It could have gone over my head, but it seems they just talked about the uses of it for this application. Here is a snippet from the short transfer learning section:
+
+![t_learning_snippet](log_photos/t_learning_snippet.png)
+
+- however, I did find that they trained their successful detection model for 100 epochs. I only trained for 10, and the training data makes it look like it was still steadily improving, but needed much more time. I think I will train it on the school computer for 50 epochs and see how that changes things
+- going to look at more research papers to try to find some specifics on how they are implementing transfer learning
+- started with brain tumor yolo-based model with transfer learning, but didn't say how they did it. They referenced [Deep Convolutional Neural Networks for Computer-Aided Detection: CNN Architectures, Dataset Characteristics and Transfer Learning](https://ieeexplore.ieee.org/document/7404017) (not on YOLO models) which mentions that they used smaller learning rates for all the CNN layers except the last. They say that "last fully-connected layer is random initialized and freshly trained, in order to accommodate the new object categories in our CADe applications"
+ and its learning rate is kept at the original. They referenced [CNN Features off-the-shelf: an Astounding Baseline for Recognition](https://www.cv-foundation.org//openaccess/content_cvpr_workshops_2014/W15/papers/Razavian_CNN_Features_Off-the-Shelf_2014_CVPR_paper.pdf) for their method but they did not focus on object detection and were not using YOLO-based models.
+- the default epochs for yolo training is set at 100, definitely think our model needs to be trained for more epochs
+- from the last training, here are some plots showing the progression of our mAP50 and mAP50-95 (mean average precision for different levels of correctness) which show that it hadn't flattened out yet
+
+![train10_mAP_plots](log_photos/train10_mAP_plots.png)
+
+- outside test with initial friction pads which are pretty thick: [link](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/Ea4VjNevzMZMiXy5tFDmahABc4tGWjPi51OIGT4sImdVfA?e=svvSOR&nav=eyJwbGF5YmFja09wdGlvbnMiOnt9LCJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbE1vZGUiOiJtaXMiLCJyZWZlcnJhbFZpZXciOiJwb3N0cm9sbC1jb3B5bGluayIsInJlZmVycmFsUGxheWJhY2tTZXNzaW9uSWQiOiIwOGRmYThjNS0yMjBlLTRjNWUtYTI0Zi03OGQzODQ4M2VlMmUifX0%3D)
+. The speed controlled servos are battling different strengths of spring force and don't compress at same rate without manual adjustment to scales. DC motors will fix that problem. The friction pad in use does not flex much and did not work well. I'm hoping some of the new designs will work better which are all thinner
+- doing a quick static loading study on solidworks to see how the model will deflect which I think is key to friction pad success. One side is approximately 50 grams. Didn't set up fixtures correctly, going to try again another time.
+
 11/5/2024
 ---
 - created some new friction pad ideas, going to print later and test if i can get a pulley to work on the servo.
