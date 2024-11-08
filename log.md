@@ -2,6 +2,20 @@ Logbook
 ---
 ---
 
+11/8/2024
+---
+- Last night, tested a bunch of new designs, thinner, thinnest and supersliced, which all did not work well. Although they did confirm that they are more frictioness than stiffplastic along so I think there needs to be a geometery that gets the friction pad out of the way rather than having a pure differential in friction.
+- Here is the initial drawing idea: 
+
+![angled_geo_friction](log_photos/angled_geo_friction.jpg)
+
+- And here is an initial solidworks creation of the geometry, but I think changes need to be made for it to work. The friction pad would be put on the left top surface:
+
+![angled_friction](log_photos/angled_friction.png)
+
+- I want to try to create an extreme version of the supersliced (bunch of feet one) that has 1 mm feet and with stronger angles to replicate a form of backcountry ski skins
+- Also, tried training for 50 epochs with data set and based on initial look into the data, it does not seem to have worked any better but did level off. Need to look more into it.
+
 11/6/2024
 ---
 - drying the spool of tpu and going to print some new friction pads to try out
