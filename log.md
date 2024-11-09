@@ -15,6 +15,15 @@ Logbook
 
 - I want to try to create an extreme version of the supersliced (bunch of feet one) that has 1 mm feet and with stronger angles to replicate a form of backcountry ski skins
 - Also, tried training for 50 epochs with data set and based on initial look into the data, it does not seem to have worked any better but did level off. Need to look more into it.
+- [insert train 12 data and discussion]
+- Designed a DC motor mount without screws, discovered it had m1.6s after and don't have any. If this idea doesn't work then I will get some screws. Going to print and test. 
+
+![DC_mount_angle_1](log_photos/DC_mount_angle_1.png)
+![DC_mount_angle_2](log_photos/DC_mount_angle_2.png)
+![DC_clamp](log_photos/DC_clamp.png)
+
+- created a board that integrates joystick and arduino
+
 
 11/6/2024
 ---
