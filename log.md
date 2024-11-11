@@ -2,6 +2,12 @@ Logbook
 ---
 ---
 
+11/11/2024
+---
+- soldered 22AWG wire onto JST wires so they could be pressed into breadboard and other connections
+- wrote new control script for PID speed control with a motor class for control by the joystick, origami_joystick_control_DC
+- 
+
 11/10/2024
 ---
 - first try at motor mount makes me think that we may need to use the m1.6 screws for a better fitting. Going to try to find some or order some.
