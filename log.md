@@ -2,6 +2,24 @@ Logbook
 ---
 ---
 
+11/10/2024
+---
+- first try at motor mount makes me think that we may need to use the m1.6 screws for a better fitting. Going to try to find some or order some.
+- soldered headers onto motor driver
+- redesigned motor mount for m1.6s and easier assembly with pulley on
+
+![new_DC_motor_mount](log_photos/new_DC_motor_mount.png)
+
+- designed new pulley for DC motor shaft
+
+![DC_pulley](log_photos/DC_pulley.png)
+
+- fixed joystick/arduino board as was too tightly spaced
+- received the JST SH connectors for motors
+- printing all new components to test. Need to write new script for PID speed control of the robot to start. Might do some loop code once motion is working well.
+
+
+
 11/8/2024
 ---
 - Last night, tested a bunch of new designs, thinner, thinnest and supersliced, which all did not work well. Although they did confirm that they are more frictioness than stiffplastic along so I think there needs to be a geometery that gets the friction pad out of the way rather than having a pure differential in friction.
