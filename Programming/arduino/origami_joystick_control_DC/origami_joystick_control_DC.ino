@@ -17,8 +17,8 @@ Encoder enc_1(M1_ENC_A, M1_ENC_B);
 Encoder enc_2(M2_ENC_A, M2_ENC_B);
 // GLOBALS
 
-int x = 512;
-int y = 512;
+long x = 512;
+long y = 512;
 
 int j = 0;
 
