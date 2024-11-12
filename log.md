@@ -6,7 +6,9 @@ Logbook
 ---
 - soldered 22AWG wire onto JST wires so they could be pressed into breadboard and other connections
 - wrote new control script for PID speed control with a motor class for control by the joystick, origami_joystick_control_DC
-- 
+- The code has a class "DC_Motor" that has all the functions other than the encoder. Tried to do timing with interrupts at first but was getting some weird problems so decided to do it a less efficient but less complex way. 
+- debugged most of code; encoder working properly; forward and reverse work alone; having a couple weird problems. One of them is that the joystick will make a motor turn correctly at first, but then it won't allow the other direction to turn. This problem is independent of direction and works both way. I tried to add a bunch of print statements but could not figure out why it is doing this. 
+- took a little bit longer than expected to write all this code, but I think it will allow more performance once its working. May need to change PID method if the current velocity control method doesn't work. I could do it by calculating a small step in postion, then using a postion PID to go to that step in a constant amount of time so bigger position step will be more speed.
 
 11/10/2024
 ---
