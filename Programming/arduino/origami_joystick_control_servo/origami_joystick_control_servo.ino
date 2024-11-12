@@ -104,7 +104,7 @@ void loop() {
   
   if (on == 1){
       read_joystick();
-      //print_xy();
+      print_xy();
 
       if (y > 550){
           compress();
