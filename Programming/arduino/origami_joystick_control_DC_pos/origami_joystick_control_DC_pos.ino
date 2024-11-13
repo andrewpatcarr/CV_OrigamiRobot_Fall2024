@@ -22,7 +22,7 @@ double y = 512;
 
 int j = 0;
 
-double FULL_TILT = 1;  //rad/s
+double FULL_TILT = 50;  //degrees. Need to find what is a good number for each jump
 
 int M1_PINS[2] = {M1_IN1_PIN, M1_IN2_PIN};
 double M1_DES = 0;
@@ -32,6 +32,7 @@ double M2_DES = 0;
 
 int K_P = 100;
 int K_I = 10;
+int PID_TIME = 20;
 unsigned long START = 0;
 unsigned long LAST_TIME = 0;
 
@@ -84,7 +85,7 @@ class Motor_DC
           interval = millis() - prev_time;
           prev_time = millis();
           
-          error = vel - des;
+          error = pos - des;
           integral += error * interval;
           Serial.print("Error: ");
           Serial.println(error);
@@ -108,10 +109,10 @@ class Motor_DC
       void go(){
           integral = 0;
           pwm = abs(output);
-          Serial.print("Output: ");
-          Serial.print(output);
-          Serial.print(" PWM: ");
-          Serial.print(pwm);
+          //Serial.print("Output: ");
+          //Serial.print(output);
+          //Serial.print(" PWM: ");
+          //Serial.print(pwm);
           if (output > 0){
               forward(min(pwm,255));
           }
@@ -122,10 +123,8 @@ class Motor_DC
               stop();
           }
       }
-      void update_vel(double pos){
-          vel_time = millis();
-          vel = (last_pos-pos)/(vel_time-last_vel_time);
-          last_vel_time = vel_time;
+      void update_pos(double pos){
+          this->pos = pos
       }
 
 };
@@ -134,14 +133,7 @@ Motor_DC motor_1(M1_PINS, K_P, K_I);
 Motor_DC motor_2(M2_PINS, K_P, K_I);
 
 void setup() {
-  
-  // Initialize Timer1 for 10 ms interrupt
-  //TCNT1 = 0;
-  //OCR1A = 1600;  // 100 ms interval with prescaler = 1
-  //TCCR1A = 0;   // CTC mode
-  //TCCR1B = (1 << WGM12) | (1 << CS10); // CTC mode, no prescaler
-  //TIMSK1 |= (1 << OCIE1A); // Enable Timer1 compare interrupt
-  
+
   motor_1.init();
   motor_2.init();
   motor_1.stop();
@@ -151,7 +143,6 @@ void setup() {
   Serial.begin(9600); // Initialize serial communication
   delay(500);
   Serial.println("done with setup");
-  //sei();  // Enable global interrupts
 
 }
 int i = 0;
@@ -171,22 +162,23 @@ void loop() {
       compress();
       START = millis();
       
-      while (millis() - START < 20){
+      while (millis() - START < PID_TIME){
         M1_POS = get_m1_angle();  //rad
         M2_POS = get_m2_angle();
         
-        motor_1.update_vel(M1_POS);
-        motor_2.update_vel(M2_POS);
+        motor_1.update_pos(M1_POS);
+        motor_2.update_pos(M2_POS);
         motor_1.pid(M1_DES);
         motor_2.pid(M2_DES);
         motor_1.go();
         motor_2.go();
+        delay(5);
       }
   }
   else if (y < 470){
       decompress();
       START = millis();
-      while (millis()-START < 20){
+      while (millis()-START < PID_TIME){
         M1_POS = get_m1_angle();  //rad
         M2_POS = get_m2_angle();
         motor_1.update_vel(M1_POS);
@@ -201,6 +193,7 @@ void loop() {
   else{
       motor_1.stop();
       motor_2.stop();
+      delay(PID_TIME);
   }
 }
 
@@ -211,12 +204,12 @@ int read_joystick(){
 
 double get_m1_angle(){
     long pos = enc_1.read();
-    double angle = pos*PI/(12*297.92);  //rad
+    double angle = pos*180/(12*297.92);  //degree
     return angle;
 }
 double get_m2_angle(){
     long pos = enc_2.read();
-    double angle = pos*PI/(12*297.92);  //rad
+    double angle = pos*180/(12*297.92);  //degree
     return angle;
 }
 
@@ -231,16 +224,16 @@ void compress(){
     double max_speed = ((y-510)/510) * FULL_TILT;
     //double max_speed = 1;
     if (x_norm > 0.3){
-        M1_DES = max_speed;
-        M2_DES = x_norm * FULL_TILT;
+        M1_DES += max_speed;
+        M2_DES += x_norm * FULL_TILT;
     }
     else if (x_norm < -0.3){
-        M1_DES = abs(x_norm) * FULL_TILT;
-        M2_DES = max_speed;
+        M1_DES += abs(x_norm) * FULL_TILT;
+        M2_DES += max_speed;
     }
     else{
-        M1_DES = max_speed;
-        M2_DES = max_speed;
+        M1_DES += max_speed;
+        M2_DES += max_speed;
     }
     
     //Serial.print(" compress: ");
@@ -253,16 +246,16 @@ void decompress(){
     double max_speed = -abs(y_norm) * FULL_TILT;
     //double max_speed = -1;
     if (x_norm > 0.3){
-        M1_DES = max_speed;
-        M2_DES = -abs(y_norm)*x_norm * FULL_TILT;
+        M1_DES += max_speed;
+        M2_DES += -abs(y_norm)*x_norm * FULL_TILT;
     }
     else if (x_norm < -0.3){
-        M1_DES = -y_norm*abs(x_norm) * FULL_TILT;
-        M2_DES = max_speed;
+        M1_DES += -y_norm*abs(x_norm) * FULL_TILT;
+        M2_DES += max_speed;
     }
     else{
-        M1_DES = max_speed;
-        M2_DES = max_speed;
+        M1_DES += max_speed;
+        M2_DES += max_speed;
     }
     //Serial.print("y: ");
     //Serial.print(y);
@@ -276,13 +269,4 @@ void print_xy(){
   Serial.print(" y = ");
   Serial.print(y);
   Serial.println();
-}
-
-ISR(TIMER1_COMPA_vect){
-    M1_POS = get_m1_angle();  //rad
-    M2_POS = get_m2_angle();  //rad
-    M1_VEL = (M1_POS-M1_POS_LAST)/.01;  //rad/s
-    M2_VEL = (M2_POS-M2_POS_LAST)/.01;  //rad/s
-    M1_POS_LAST = M1_POS;
-    M2_POS_LAST = M2_POS;
 }
