@@ -27,13 +27,13 @@ void setup(){
 }
 
 void loop(){
-  x1 = analogRead(2);
-  y1 = analogRead(3);
-  //print_xy()
-  Serial.print("pin 2: ");
-  Serial.print(digitalRead(key));
-  Serial.print(" on: ");
-  Serial.print(on);
-  Serial.println();
+  x1 = analogRead(4);
+  y1 = analogRead(5);
+  print_xy();
+  //Serial.print("pin 2: ");
+  //Serial.print(digitalRead(key));
+  //Serial.print(" on: ");
+  //Serial.print(on);
+  //Serial.println();
   delay(1000);
 }
