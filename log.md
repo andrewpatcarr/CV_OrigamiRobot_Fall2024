@@ -2,6 +2,13 @@ Logbook
 ---
 ---
 
+11/12/2024
+---
+- changed implementation on pid from velocity to position, differing speeds are made my adding degrees to the controllers setpoint then letting to try to go there for 20 ms. This method allows controller to control speed and direction well but needs to be adjusted and tuned. 
+- I am going to add a feature that will align the motors back to the same angle position after a turn has been done or any time the x readout from joystick is zero. This will allow for ease recentering back to initial tension. 
+- The controller needs to be tuned and the added degrees adjusted such that at normal full speed, the motors have space (in the form of PWM) to adjust and give power to one motor over the other in the case that one side of the robot has more spring force pushing back.
+- made some final adjustments to the motor mount. Printing new ones that should be good to be mounted onto worm
+
 11/11/2024
 ---
 - soldered 22AWG wire onto JST wires so they could be pressed into breadboard and other connections
