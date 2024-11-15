@@ -4,7 +4,8 @@ Logbook
 
 11/14/2024
 ---
-- fully assembled rest of robot. Will update with more info tomorrow with some pictures. Worm motion is working better with lower hole attachment. Controller needs to be debugged for both motors and need to create a script for adjusting each motor independently 
+- fully assembled rest of robot. Will update with more info tomorrow with some pictures. Worm motion is working better with lower hole attachment. Controller needs to be debugged for both motors and need to create a script for adjusting each motor independently
+- new version is 97 grams
 
 11/12/2024
 ---
