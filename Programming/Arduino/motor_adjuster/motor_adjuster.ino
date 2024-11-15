@@ -39,17 +39,17 @@ int M2_PINS[2] = {M2_IN1_PIN, M2_IN2_PIN};
 double M2_DES = 0;
 
 int K_P = 10;
-int K_I = 0;
+int K_I = 1;
 int PID_TIME = 100;
 unsigned long START = 0;
 unsigned long LAST_TIME = 0;
 
 volatile int M1_VEL = 0;
-double M1_POS = 0;
-volatile int M1_POS_LAST = 0;
+double M1_POS = -999;
+volatile int M1_POS_LAST = -999;
 volatile int M2_VEL = 0;
-double M2_POS = 0;
-volatile int M2_POS_LAST = 0;
+double M2_POS = -999;
+volatile int M2_POS_LAST = -999;
 
 class Motor_DC
 {
@@ -95,12 +95,8 @@ class Motor_DC
           
           error = pos - des;
           integral += error * interval;
-          Serial.print("Actual: ");
-          Serial.print(pos);
-          Serial.print("Desired: ");
-          Serial.print(des);
-          Serial.print("Error: ");
-          Serial.println(error);
+          //Serial.print("Error: ");
+          //Serial.println(error);
           output = k_p*error + k_i*integral;
           
       }
@@ -129,14 +125,14 @@ class Motor_DC
               forward(min(pwm,255));
           }
           else if (output < 0){
-              reverse(min(pwm,255)); // reverse should compress robot
+              reverse(min(pwm,255));
           }
           else {
               stop();
           }
       }
-      void update_pos(double posi){
-          pos = posi;
+      void update_pos(double pos){
+          this->pos = pos;
           
       }
       void clear_integral(){
@@ -166,57 +162,57 @@ void setup() {
   delay(500);
   read_joystick();
   print_xy();
-  delay(500);
+  delay(1500);
   init_joystick();
   Serial.println();
-  Serial.print(middle_x);
-  Serial.print(middle_y);
+  Serial.print(y_upper);
+  Serial.print(y_lower);
+
   Serial.println("done with setup");
   delay(1500);
 
 }
 
 void loop() {
-
   read_joystick();
-  //print_xy();
-  if (y > y_upper){
-      Serial.println("decomp");
-      check_dir(1);
-      decompress();
-      //Serial.print("M1 Pos: ");
-      //Serial.print(get_m1_angle());
-      //Serial.print(" Des pos: ");
-      //Serial.println(M1_DES);
-      // add way to ensure back to even tension when coming from turn back to compression
-      START = millis();
-      while (millis() - START < PID_TIME){
-        do_pid();
-        //motor_1.print_info();
-        
-      }
-      
-  }
-  else if (y < y_lower){
-      Serial.println("comp");
-      check_dir(0);
-      compress();
-      //Serial.print("M1 Pos: ");
-      //Serial.print(get_m1_angle());
-      //Serial.print(" Des pos: ");
-      //Serial.println(M1_DES);
-      // add way to ensure back to even tension when coming from turn back to decompression
-      START = millis();
-      while (millis()-START < PID_TIME){
-        do_pid();
-        //motor_1.print_info();
-      }
-  }
-  else{
+  print_xy();
+  M1_POS = get_m1_angle();
+  M2_POS = get_m2_angle();
+  print_angles();
+
+
+  if (x > x_upper || x < x_lower){
+    if (x > x_upper){
       motor_1.stop();
-      motor_2.stop();
-      delay(PID_TIME);
+      motor_2.forward(100);
+      Serial.println("m2 forward");
+    }
+    else if (x < x_lower){
+      motor_1.stop();
+      motor_2.reverse(100);
+      Serial.println("m2 reverse");
+    }
   }
+  else {
+    if (y > y_upper){
+      motor_1.forward(100);
+      Serial.println("m1 forward");
+    }
+    else if (y < y_lower){
+      motor_1.reverse(100);
+      Serial.println("m1 reverse");
+    }
+  }
+  if (x < x_upper && x > x_lower){
+    motor_2.stop();
+    
+  }
+  if (y < y_upper && y > y_lower){
+    motor_1.stop();
+    
+  }
+  delay(100);
+
 }
 
 int read_joystick(){
@@ -269,15 +265,9 @@ void decompress(){
     //double max_speed = -1;
     if (x_norm > 0.3){
         M1_DES += max_speed;
-        double added = -abs(y_norm)*x_norm * FULL_TILT;
-        Serial.print("Added: ");
-        Serial.println(added);
         M2_DES += -abs(y_norm)*x_norm * FULL_TILT;
     }
     else if (x_norm < -0.3){
-        double added = -abs(y_norm)*x_norm * FULL_TILT;
-        Serial.print("Added: ");
-        Serial.println(added);
         M1_DES += -y_norm*abs(x_norm) * FULL_TILT;
         M2_DES += max_speed;
     }
@@ -289,8 +279,8 @@ void decompress(){
     //Serial.print(y);
     //Serial.print(" y_norm: ");
     //Serial.print(y_norm);
-    Serial.print(" decompress: ");
-    Serial.println(max_speed);
+    //Serial.print(" decompress: ");
+    //Serial.println(max_speed);
 
 }
 void print_xy(){
@@ -298,7 +288,7 @@ void print_xy(){
   Serial.print(x);
   Serial.print(" y = ");
   Serial.print(y);
-  Serial.println();
+  //Serial.println();
 }
 void do_pid(){
   M1_POS = get_m1_angle();
@@ -309,7 +299,6 @@ void do_pid(){
   Serial.println(M2_POS);
   motor_1.update_pos(M1_POS);
   motor_2.update_pos(M2_POS);
-  
   motor_1.pid(M1_DES);
   motor_2.pid(M2_DES);
   motor_1.go();
@@ -318,18 +307,10 @@ void do_pid(){
 }
 void check_dir(int dir){
   if (dir != PREV_DIR){
-    Serial.println("in check dir");
     motor_1.clear_integral();
     motor_2.clear_integral();
-    get_m1_angle();
-    get_m2_angle();
     M1_DES = M1_POS;
     M2_DES = M2_POS;
-    Serial.print("M1_POS");
-    Serial.print(M1_POS);
-    Serial.print("M1_DES");
-    Serial.println(M1_POS);
-
     PREV_DIR = dir;
   }
 }
@@ -340,4 +321,10 @@ void init_joystick(){
   y_lower = middle_y*.8;
   x_upper = middle_x*1.2;
   x_lower = middle_x*.8;
+}
+void print_angles(){
+  Serial.print("M1 Angle: ");
+  Serial.print(M1_POS);
+  Serial.print(" M2 Angle: ");
+  Serial.println(M2_POS);
 }
