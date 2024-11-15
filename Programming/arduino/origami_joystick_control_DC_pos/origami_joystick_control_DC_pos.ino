@@ -29,7 +29,7 @@ double x_lower = middle_x*.8;
 
 int j = 0;
 
-double FULL_TILT = 1;  //degrees. Need to find what is a good number for each jump
+double FULL_TILT = 5;  //degrees. Need to find what is a good number for each jump
 int PREV_DIR = 0;
 
 int M1_PINS[2] = {M1_IN1_PIN, M1_IN2_PIN};
@@ -39,8 +39,8 @@ int M2_PINS[2] = {M2_IN1_PIN, M2_IN2_PIN};
 double M2_DES = 0;
 
 int K_P = 10;
-int K_I = 0;
-int PID_TIME = 100;
+int K_I = 1;
+int PID_TIME = 50;
 unsigned long START = 0;
 unsigned long LAST_TIME = 0;
 
@@ -93,7 +93,7 @@ class Motor_DC
           interval = millis() - prev_time;
           prev_time = millis();
           
-          error = pos - des;
+          error = des - pos;
           integral += error * interval;
           Serial.print("Actual: ");
           Serial.print(pos);
@@ -309,7 +309,10 @@ void do_pid(){
   Serial.println(M2_POS);
   motor_1.update_pos(M1_POS);
   motor_2.update_pos(M2_POS);
-  
+  Serial.print("M1, M2 DES:");
+  Serial.print(M1_DES);
+  Serial.print(", ");
+  Serial.println(M2_DES);
   motor_1.pid(M1_DES);
   motor_2.pid(M2_DES);
   motor_1.go();
@@ -317,18 +320,28 @@ void do_pid(){
   delay(5);
 }
 void check_dir(int dir){
+  
   if (dir != PREV_DIR){
-    Serial.println("in check dir");
+    Serial.print(dir);
+    Serial.println(", in check dir");
     motor_1.clear_integral();
     motor_2.clear_integral();
     get_m1_angle();
     get_m2_angle();
-    M1_DES = M1_POS;
-    M2_DES = M2_POS;
-    Serial.print("M1_POS");
-    Serial.print(M1_POS);
+    if (dir == 1){
+      M1_DES = -1*abs(M1_POS);
+      M2_DES = -1*abs(M1_POS);
+    }
+    else {
+      M1_DES = 1*abs(M1_POS);
+      M2_DES = 1*abs(M1_POS);
+    }
+    //M1_DES = M1_POS;
+    //M2_DES = M2_POS;
+    //Serial.print("M1_POS");
+    //Serial.print(M1_POS);
     Serial.print("M1_DES");
-    Serial.println(M1_POS);
+    Serial.println(M1_DES);
 
     PREV_DIR = dir;
   }
