@@ -2,6 +2,10 @@ Logbook
 ---
 ---
 
+11/14/2024
+---
+- fully assembled rest of robot. Will update with more info tomorrow with some pictures. Worm motion is working better with lower hole attachment. Controller needs to be debugged for both motors and need to create a script for adjusting each motor independently 
+
 11/12/2024
 ---
 - changed implementation on pid from velocity to position, differing speeds are made my adding degrees to the controllers setpoint then letting to try to go there for 20 ms. This method allows controller to control speed and direction well but needs to be adjusted and tuned. 
