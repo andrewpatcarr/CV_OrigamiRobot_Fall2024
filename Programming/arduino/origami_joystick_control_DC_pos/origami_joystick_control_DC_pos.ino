@@ -247,10 +247,10 @@ void compress(){
     //double max_speed = 1;
     if (x_norm > 0.3){
         M1_DES += max_speed;
-        M2_DES += x_norm * FULL_TILT;
+        M2_DES += (1-x_norm) * FULL_TILT;
     }
     else if (x_norm < -0.3){
-        M1_DES += abs(x_norm) * FULL_TILT;
+        M1_DES += (1 - abs(x_norm)) * FULL_TILT;
         M2_DES += max_speed;
     }
     else{
@@ -272,13 +272,13 @@ void decompress(){
         double added = -abs(y_norm)*x_norm * FULL_TILT;
         Serial.print("Added: ");
         Serial.println(added);
-        M2_DES += -abs(y_norm)*x_norm * FULL_TILT;
+        M2_DES += (1-x_norm) * max_speed;
     }
     else if (x_norm < -0.3){
         double added = -abs(y_norm)*x_norm * FULL_TILT;
         Serial.print("Added: ");
         Serial.println(added);
-        M1_DES += -y_norm*abs(x_norm) * FULL_TILT;
+        M1_DES += (1-abs(x_norm)) * max_speed;
         M2_DES += max_speed;
     }
     else{

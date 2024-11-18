@@ -1,6 +1,15 @@
 Logbook
 ---
 ---
+
+11/17/2024
+---
+- Created flow diagrams for current control method (positionally) and for possible new method (velocity with alignment checking). Also created a flow diagram of how the x,y is decoded for straight motion and turning.
+
+![pos_control_flow](log_photos/pos_control_flow.jpeg)
+![vel_control_flow](log_photos/vel_control_flow.jpg)
+![xy_decode](log_photos/xy_decode.jpeg)
+
 11/15/2024
 ---
 - worked out bugs enough for compression/decompression based on the joystick movements. Script for that is called origami_joystick_control_DC_pos.ino
