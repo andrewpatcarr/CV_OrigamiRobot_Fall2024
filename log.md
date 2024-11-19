@@ -10,6 +10,8 @@ Logbook
 ![vel_control_flow](log_photos/vel_control_flow.jpg)
 ![xy_decode](log_photos/xy_decode.jpeg)
 
+
+
 11/15/2024
 ---
 - worked out bugs enough for compression/decompression based on the joystick movements. Script for that is called origami_joystick_control_DC_pos.ino
@@ -23,7 +25,7 @@ Logbook
 Increased worm angle seems to make movement possible again in the direction that the friction pads are designed for. The control is still not working great and you'll see it get off and jiggle during the movement. I think I need a combination of velocity and position PI control. Velocity for general movement and pos for reallignment after turning or if it gets off. 
 - I think the next steps should be: get basics of controller working for reliable testing, try different worm angles, optimize friction pads
 
-
+![close_up_robot](log_photos/close_up_robot.jpg)
 
 11/14/2024
 ---
