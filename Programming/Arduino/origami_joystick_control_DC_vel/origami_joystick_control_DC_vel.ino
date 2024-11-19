@@ -20,16 +20,16 @@ Encoder enc_2(M2_ENC_A, M2_ENC_B);
 double x = 512;
 double y = 512;
 
-double middle_y = 15;
-double middle_x = 15;
+double middle_y = 512;
+double middle_x = 512;
 double y_upper = middle_y*1.2;
 double y_lower = middle_y*.8;
 double x_upper = middle_x*1.2;
 double x_lower = middle_x*.8;
 
-int j = 0;
+int ACCEPT_RANGE = 5;  //degrees
 
-double FULL_TILT = 5;  //degrees. Need to find what is a good number for each jump
+double FULL_TILT = 5;  //degrees/s. Need to find what full speed is with force
 int PREV_DIR = 0;
 
 int M1_PINS[2] = {M1_IN1_PIN, M1_IN2_PIN};
@@ -47,31 +47,28 @@ unsigned long LAST_TIME = 0;
 volatile int M1_VEL = 0;
 double M1_POS = 0;
 volatile int M1_POS_LAST = 0;
+unsigned long M1_TIME = 0;
 volatile int M2_VEL = 0;
 double M2_POS = 0;
 volatile int M2_POS_LAST = 0;
+unsigned long M2_TIME = 0;
 
 class Motor_DC
 {
   private:
       int in1;
       int in2;
-      int encA;
-      int encB;
       double k_p;
       double k_i;
       double interval;
       int error;
       double integral;
       unsigned long prev_time;
-      int speed;
       double output;
       int pwm;
       double pos;
       double last_pos;
-      int angle;
       double vel;
-      
       unsigned long last_vel_time;
 
   public:
@@ -89,27 +86,27 @@ class Motor_DC
           //pinMode(encB, INPUT);
           
       }
-      void pid(int des){
+      void pid(double v_ref){
           interval = millis() - prev_time;
           prev_time = millis();
           
-          error = des - pos;
+          error = v_ref - vel;
           integral += error * interval;
-          Serial.print("Actual: ");
-          Serial.print(pos);
-          Serial.print("Desired: ");
-          Serial.print(des);
-          Serial.print("Error: ");
-          Serial.println(error);
+          //Serial.print("Actual: ");
+          //Serial.print(pos);
+          //Serial.print("Desired: ");
+          //Serial.print(des);
+          //Serial.print("Error: ");
+          //Serial.println(error);
           output = k_p*error + k_i*integral;
           
       }
-      void forward(int pwm){
-          analogWrite(in1, pwm);
+      void forward(int speed){
+          analogWrite(in1, speed);
           analogWrite(in2, 0);
           //Serial.println(" forwarded ");
       }
-      void reverse(int pwm){
+      void reverse(int speed){
           analogWrite(in1, 0);
           analogWrite(in2, pwm);
           //Serial.println(" reversed ");
@@ -148,6 +145,12 @@ class Motor_DC
           Serial.print(" PWM: ");
           Serial.println(pwm);
       }
+      void update_vel(double pos, unsigned long vel_time){
+          double del_time = double(vel_time) - double(last_vel_time);
+          vel = (last_pos-pos)/(del_time);
+          last_vel_time = vel_time;
+          last_pos = pos;
+      }
 
 };
 
@@ -182,8 +185,8 @@ void loop() {
   //print_xy();
   if (y > y_upper){
       Serial.println("decomp");
-      check_dir(1);
       decompress();
+      alignment(0);
       //Serial.print("M1 Pos: ");
       //Serial.print(get_m1_angle());
       //Serial.print(" Des pos: ");
@@ -191,7 +194,7 @@ void loop() {
       // add way to ensure back to even tension when coming from turn back to compression
       START = millis();
       while (millis() - START < PID_TIME){
-        do_pid();
+        do_pid(M1_DES, M2_DES);
         //motor_1.print_info();
         
       }
@@ -199,8 +202,8 @@ void loop() {
   }
   else if (y < y_lower){
       Serial.println("comp");
-      check_dir(0);
       compress();
+      alignment(1);
       //Serial.print("M1 Pos: ");
       //Serial.print(get_m1_angle());
       //Serial.print(" Des pos: ");
@@ -208,54 +211,58 @@ void loop() {
       // add way to ensure back to even tension when coming from turn back to decompression
       START = millis();
       while (millis()-START < PID_TIME){
-        do_pid();
+        do_pid(M1_DES, M2_DES);
         //motor_1.print_info();
       }
   }
   else{
-      motor_1.stop();
-      motor_2.stop();
-      delay(PID_TIME);
+      START = millis();
+      while (millis()-START < PID_TIME){
+        do_pid(0, 0);
+      }
   }
 }
 
-int read_joystick(){
+void read_joystick(){
     x = analogRead(x_val);
     y = analogRead(y_val);
 }
 
 double get_m1_angle(){
     long pos = enc_1.read();
+    unsigned long time = millis();
     double angle = pos*180/(12*297.92);  //degree
-    return angle;
+
+    return angle, time;
 }
 double get_m2_angle(){
     long pos = enc_2.read();
+    unsigned long time = millis();
     double angle = pos*180/(12*297.92);  //degree
-    return angle;
+    return angle, time;
 }
 
 void compress(){
     //Serial.print("y: ");
     //Serial.print(y);
-    double y_norm = (y-middle_y)/middle_y;
+    double y_norm = (double(y)-middle_y)/middle_y;
     //Serial.print(" y_norm: ");
     //Serial.print(y_norm);
     
-    double x_norm = (x-middle_x)/middle_x;
+    double x_norm = (double(x)-middle_x)/middle_x;
     double max_speed = abs(y_norm) * FULL_TILT;
     //double max_speed = 1;
     if (x_norm > 0.3){
-        M1_DES += max_speed;
-        M2_DES += (1-x_norm) * FULL_TILT;
+        M1_DES = max_speed;
+        M2_DES = (1-x_norm) * FULL_TILT;
     }
     else if (x_norm < -0.3){
-        M1_DES += (1 - abs(x_norm)) * FULL_TILT;
-        M2_DES += max_speed;
+        M1_DES = (1 - abs(x_norm)) * FULL_TILT;
+        M2_DES = max_speed;
     }
     else{
-        M1_DES += max_speed;
-        M2_DES += max_speed;
+        M1_DES = max_speed;
+        M2_DES = max_speed;
     }
     
     //Serial.print(" compress: ");
@@ -263,34 +270,34 @@ void compress(){
 }
 
 void decompress(){
-    double y_norm = (y-middle_y)/middle_y;
-    double x_norm = (x-middle_x)/middle_x;
-    double max_speed = -abs(y_norm) * FULL_TILT;
+    double y_norm = (double(y)-middle_y)/middle_y;
+    double x_norm = (double(x)-middle_x)/middle_x;
+    double max_speed = abs(y_norm) * FULL_TILT;
     //double max_speed = -1;
     if (x_norm > 0.3){
-        M1_DES += max_speed;
-        double added = -abs(y_norm)*x_norm * FULL_TILT;
-        Serial.print("Added: ");
-        Serial.println(added);
-        M2_DES += (1-x_norm) * max_speed;
+        M1_DES = -max_speed;
+        //double added = -abs(y_norm)*x_norm * FULL_TILT;
+        //Serial.print("Added: ");
+        //Serial.println(added);
+        M2_DES = -(1-x_norm) * max_speed;
     }
     else if (x_norm < -0.3){
-        double added = -abs(y_norm)*x_norm * FULL_TILT;
-        Serial.print("Added: ");
-        Serial.println(added);
-        M1_DES += (1-abs(x_norm)) * max_speed;
-        M2_DES += max_speed;
+        //double added = -abs(y_norm)*x_norm * FULL_TILT;
+        //Serial.print("Added: ");
+        //Serial.println(added);
+        M1_DES = -(1-abs(x_norm)) * max_speed;
+        M2_DES = -max_speed;
     }
     else{
-        M1_DES += max_speed;
-        M2_DES += max_speed;
+        M1_DES = -max_speed;
+        M2_DES = -max_speed;
     }
     //Serial.print("y: ");
     //Serial.print(y);
     //Serial.print(" y_norm: ");
     //Serial.print(y_norm);
-    Serial.print(" decompress: ");
-    Serial.println(max_speed);
+    //Serial.print(" decompress: ");
+    //Serial.println(max_speed);
 
 }
 void print_xy(){
@@ -300,52 +307,26 @@ void print_xy(){
   Serial.print(y);
   Serial.println();
 }
-void do_pid(){
-  M1_POS = get_m1_angle();
-  M2_POS = get_m2_angle();
-  Serial.print("M1 Angle: ");
-  Serial.print(M1_POS);
-  Serial.print("M2 Angle: ");
-  Serial.println(M2_POS);
-  motor_1.update_pos(M1_POS);
-  motor_2.update_pos(M2_POS);
-  Serial.print("M1, M2 DES:");
-  Serial.print(M1_DES);
-  Serial.print(", ");
-  Serial.println(M2_DES);
-  motor_1.pid(M1_DES);
-  motor_2.pid(M2_DES);
+void do_pid(double M1_des, double M2_des){
+  M1_POS, M1_TIME = get_m1_angle();
+  M2_POS, M2_TIME = get_m2_angle();
+  //Serial.print("M1 Angle: ");
+  //Serial.print(M1_POS);
+  //Serial.print("M2 Angle: ");
+  //Serial.println(M2_POS);
+  motor_1.update_vel(M1_POS, M1_TIME);
+  motor_2.update_vel(M2_POS, M2_TIME);
+  //Serial.print("M1, M2 DES:");
+  //Serial.print(M1_DES);
+  //Serial.print(", ");
+  //Serial.println(M2_DES);
+  motor_1.pid(M1_des);
+  motor_2.pid(M2_des);
   motor_1.go();
   motor_2.go();
-  delay(5);
+  //delay(5);
 }
-void check_dir(int dir){
-  
-  if (dir != PREV_DIR){
-    Serial.print(dir);
-    Serial.println(", in check dir");
-    motor_1.clear_integral();
-    motor_2.clear_integral();
-    get_m1_angle();
-    get_m2_angle();
-    if (dir == 1){
-      M1_DES = -1*abs(M1_POS);
-      M2_DES = -1*abs(M1_POS);
-    }
-    else {
-      M1_DES = 1*abs(M1_POS);
-      M2_DES = 1*abs(M1_POS);
-    }
-    //M1_DES = M1_POS;
-    //M2_DES = M2_POS;
-    //Serial.print("M1_POS");
-    //Serial.print(M1_POS);
-    Serial.print("M1_DES");
-    Serial.println(M1_DES);
 
-    PREV_DIR = dir;
-  }
-}
 void init_joystick(){
   middle_x = x;
   middle_y = y;
@@ -353,4 +334,25 @@ void init_joystick(){
   y_lower = middle_y*.8;
   x_upper = middle_x*1.2;
   x_lower = middle_x*.8;
+}
+void alignment(int direction){
+  M1_POS, M1_TIME = get_m1_angle();
+  M2_POS, M2_TIME = get_m2_angle();
+  if (direction == 1){
+    if (M1_POS - M2_POS > ACCEPT_RANGE){
+        M1_DES = 0; // assumes more positive angle is ahead
+    }
+    else if (M2_POS - M1_POS > ACCEPT_RANGE){
+        M2_DES = 0; // assumes more positive angle is ahead
+    }
+  }
+  else if (direction == 0){
+    if (M1_POS - M2_POS > ACCEPT_RANGE){
+        M2_DES = 0; // assumes more positive angle is behind
+    }
+    else if (M2_POS - M1_POS > ACCEPT_RANGE){
+        M1_DES = 0; // assumes more positive angle is behind
+    }
+  }
+
 }

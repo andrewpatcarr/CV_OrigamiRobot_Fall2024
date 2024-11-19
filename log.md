@@ -2,6 +2,11 @@ Logbook
 ---
 ---
 
+11/18/2024
+---
+- wrote new velocity control as shown in flow diagram [origami_joystick_control_DC_vel.ino](programming/arduino/origami_joystick_control_DC_vel/origami_joystick_control_DC_vel.ino)
+
+
 11/17/2024
 ---
 - Created flow diagrams for current control method (positionally) and for possible new method (velocity with alignment checking). Also created a flow diagram of how the x,y is decoded for straight motion and turning.
