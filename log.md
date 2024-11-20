@@ -4,7 +4,7 @@ Logbook
 
 11/18/2024
 ---
-- wrote new velocity control as shown in flow diagram [origami_joystick_control_DC_vel.ino](programming/arduino/origami_joystick_control_DC_vel/origami_joystick_control_DC_vel.ino)
+- wrote new velocity control as shown in flow diagram [origami_joystick_control_DC_vel.ino](programming/Arduino/origami_joystick_control_DC_vel/origami_joystick_control_DC_vel.ino)
 
 
 11/17/2024
