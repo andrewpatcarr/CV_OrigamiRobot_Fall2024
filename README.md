@@ -11,6 +11,6 @@ Repository for Fall 2024 ME-400 (Special Problems for Advanced Undergraduates)
 
 - setup.md has some setup information for RealSense 2 and YOLO
 
-- Programming has some scripts for using RealSense, cv models, training and testing, and eventually control of robot
+- Programming has some scripts for using RealSense, cv models, training and testing, and controller for robot
 
 - CAD has the origami robot assembly, some other SolidWorks files, and STLs for 3D printing
