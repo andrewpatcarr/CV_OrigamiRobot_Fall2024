@@ -1,11 +1,29 @@
 Logbook
 ---
 ---
+11/20/2024
+---
+- new controller works very good, normal compression and decompression works smoothly. The controller also makes it easy to adjust one motor on the fly which also allows turning motion. It is up to the standard to complete reliable tests.
+- tested it outside again, worked about the same as before --> not well. The surface was somewhat uneven but it looked more like the friction pads were not working as designed. The robot being so light allows the wires to make some impact. I tried to reduce it as much as possible but it is hard with stiff wires.
+- I tried lowering the anchor point of the tether, and it did not make much of a difference. The friction pads definetly work in creating friction but one pad dominates and won't move either way. Or the pads will be at a similar friction force which makes both sides slide during compression.
+
+Current motion cases:
+
+1. compression --> both slip --> decompression --> one holds slips slightly less than other --> very small amount of forward displacement
+2. compression --> one holds, other slips --> decompression --> same one holds, same one slips --> no motion
+
+I see two possibilities for these problems:
+1. theoretically sound for forward motion but very hard to create in the field
+2. fundamentally and theoretically flawed for forward motion
+
+- Directional friction is sound so I think it is likely that this would work if perfectly implemented, but is just very difficult to mitigate all the negative factors
+- For the gecko pads, the implementation and overall movement may need to change. Similar to how an inch worm moves, a lifting, moving forward then planting approach would be ideal. It will be hard to actuate and move one side at a time. We don't have a way to only move one pad a time without directional friction.
+
+
 
 11/18/2024
 ---
 - wrote new velocity control as shown in flow diagram [origami_joystick_control_DC_vel.ino](Programming/Arduino/origami_joystick_control_DC_vel/origami_joystick_control_DC_vel.ino)
-
 
 11/17/2024
 ---
