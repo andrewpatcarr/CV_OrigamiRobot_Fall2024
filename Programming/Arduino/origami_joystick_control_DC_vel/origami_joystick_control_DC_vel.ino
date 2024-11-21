@@ -92,13 +92,18 @@ class Motor_DC
           
           error = v_ref - vel;
           integral += error * interval;
-          //Serial.print("Actual: ");
-          //Serial.print(pos);
-          //Serial.print("Desired: ");
-          //Serial.print(des);
+          /*
+          Serial.print("Actual: ");
+          Serial.print(vel);
+          Serial.print("Reference: ");
+          Serial.print(v_ref);
           //Serial.print("Error: ");
-          //Serial.println(error);
+          //Serial.println(error)
+          */
           output = k_p*error + k_i*integral;
+          //Serial.print("Output: ");
+          //Serial.println(output);
+          delay(5);
           
       }
       void forward(int speed){
@@ -184,9 +189,10 @@ void loop() {
   read_joystick();
   //print_xy();
   if (y > y_upper){
-      Serial.println("decomp");
+      //Serial.println("decomp");
       decompress();
       alignment(0);
+      //print_angles();
       //Serial.print("M1 Pos: ");
       //Serial.print(get_m1_angle());
       //Serial.print(" Des pos: ");
@@ -201,9 +207,10 @@ void loop() {
       
   }
   else if (y < y_lower){
-      Serial.println("comp");
+      //Serial.println("comp");
       compress();
       alignment(1);
+      //print_angles();
       //Serial.print("M1 Pos: ");
       //Serial.print(get_m1_angle());
       //Serial.print(" Des pos: ");
@@ -217,6 +224,7 @@ void loop() {
   }
   else{
       START = millis();
+      //print_angles();
       while (millis()-START < PID_TIME){
         do_pid(0, 0);
       }
@@ -310,13 +318,13 @@ void print_xy(){
 void do_pid(double M1_des, double M2_des){
   M1_POS, M1_TIME = get_m1_angle();
   M2_POS, M2_TIME = get_m2_angle();
-  //Serial.print("M1 Angle: ");
+  //Serial.print("M1 Actual: ");
   //Serial.print(M1_POS);
   //Serial.print("M2 Angle: ");
-  //Serial.println(M2_POS);
+  //Serial.print(M2_POS);
   motor_1.update_vel(M1_POS, M1_TIME);
   motor_2.update_vel(M2_POS, M2_TIME);
-  //Serial.print("M1, M2 DES:");
+  //Serial.print("M1 REF:");
   //Serial.print(M1_DES);
   //Serial.print(", ");
   //Serial.println(M2_DES);
@@ -338,7 +346,7 @@ void init_joystick(){
 void alignment(int direction){
   M1_POS, M1_TIME = get_m1_angle();
   M2_POS, M2_TIME = get_m2_angle();
-  if (direction == 1){
+  if (direction == 1 && x_upper > x > x_lower){
     if (M1_POS - M2_POS > ACCEPT_RANGE){
         M1_DES = 0; // assumes more positive angle is ahead
     }
@@ -346,7 +354,7 @@ void alignment(int direction){
         M2_DES = 0; // assumes more positive angle is ahead
     }
   }
-  else if (direction == 0){
+  else if (direction == 0 && x_upper > x > x_lower){
     if (M1_POS - M2_POS > ACCEPT_RANGE){
         M2_DES = 0; // assumes more positive angle is behind
     }
@@ -354,5 +362,15 @@ void alignment(int direction){
         M1_DES = 0; // assumes more positive angle is behind
     }
   }
+}
+void print_angles(){
+  Serial.print("M1 Angle: ");
+  Serial.print(M1_POS);
+  Serial.print(" M1 DES: ");
+  Serial.print(M1_POS);
+  Serial.print(" M2 Angle: ");
+  Serial.print(M2_POS);
+  Serial.print(" M2 DES: ");
+  Serial.println(M2_POS);
 
 }
