@@ -1,6 +1,18 @@
 Logbook
 ---
 ---
+11/28/2024
+---
+- from last meeting, motion seems to work better with short and fast compression cycles. This is when the robot sits more flat but has torques curling the robot into the ground.
+- The robot often gets stuck on one pad, but a max compression can sometimes set it free
+- this [paper](https://ieeexplore.ieee.org/abstract/document/6266749?casa_token=2NHwqPMrAp0AAAAA:Cy2g7GQio3avqqqwebAlX3SHQyJ9VryApqf8gQ8An6_T1wlNR-Nc-jH1ESd8uGxClsHmPrb_)
+uses a single leg friction pad similar to our design. I think we could use something similar with longer legs as they will be much flexible and can deform how we want. 
+- our motion is called peristaltic
+- more worm angle seems to be cancelled out with less friction pad angle. So with a very large worm angle, we could have less worm angle and vice versa. Depending if we want less caterpillar like motion
+- [OSCAR](https://www.ideals.illinois.edu/items/118254) uses a small locking wheel to get directional movement
+
+![frictionpad_def](log_photos/frictionpad_def.jpeg)
+
 11/20/2024
 ---
 - new controller works very good, normal compression and decompression works smoothly. The controller also makes it easy to adjust one motor on the fly which also allows turning motion. It is up to the standard to complete reliable tests.
@@ -18,7 +30,7 @@ I see two possibilities for these problems:
 
 - Directional friction is sound so I think it is likely that this would work if perfectly implemented, but is just very difficult to mitigate all the negative factors
 - For the gecko pads, the implementation and overall movement may need to change. Similar to how an inch worm moves, a lifting, moving forward then planting approach would be ideal. It will be hard to actuate and move one side at a time. We don't have a way to only move one pad a time without directional friction.
-
+- controller with no delay does not function. I am pretty sure this is do limitations of the motor driver. 
 
 
 11/18/2024
