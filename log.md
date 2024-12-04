@@ -1,6 +1,14 @@
 Logbook
 ---
 ---
+12/03/2024
+---
+- going to test more angled friction pads. Previous ones were at a 40 degree angle. New ones are 30 and 25. I am also make these longer. Previous were 3 mm tall, new ones are 4 and 4.5 mm tall.
+- these should be less stiff and should deform and work closer to how we think they should
+- the auto-orient showed me that I can print them standing up in a different way than I was thinking. I am putting 1 layer of raft because I feel it'll be unstable. Since I can print it this way, I am going to try 15 degrees. I had to reduce the amount of teeth from 6 to 5 for this.
+
+![small_angle_friction](log_photos/small_angle_friction.png)
+
 11/28/2024
 ---
 - from last meeting, motion seems to work better with short and fast compression cycles. This is when the robot sits more flat but has torques curling the robot into the ground.
