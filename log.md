@@ -1,6 +1,10 @@
 Logbook
 ---
 ---
+12/06/2024
+---
+- working on report/documentation
+
 12/03/2024
 ---
 - going to test more angled friction pads. Previous ones were at a 40 degree angle. New ones are 30 and 25. I am also make these longer. Previous were 3 mm tall, new ones are 4 and 4.5 mm tall.
