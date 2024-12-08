@@ -1,6 +1,23 @@
 Logbook
 ---
 ---
+12/07/2024
+---
+- working on report/documentation
+- had to fix some paths for images on log that got off because I reorganized some files
+- tried new pad, pretty sure it is 25 degrees at 4 mm height. Works really well on carpet, going to try on rough outdoor surface
+
+will add videos soon
+[video of robot on carpet]
+
+- works on rough surface relatively well. Better than before for sure.
+
+[video on standard garage concrete]
+
+[video on rougher more irregular concrete]
+
+- one thing i realized during testing: there is a balance between angle of the pad, the stiffness of the teeth, and the surface. This balance changes the performance. if the angle is very small, the teeth won't grab. if the angle is too large, the teeth won't grab. if the teeth are too weak, they will just fall down and not grab. If they are too stiff, they will not grab. A rougher surface seems to always be a good thing. Should try on sand paper to see
+
 12/06/2024
 ---
 - working on report/documentation
@@ -239,24 +256,24 @@ Video of test:
     <tbody>
         <tr>
             <th>1</th>
-            <td><img src="Programming/runs_compare1/detect/predict/comparison_image1.jpeg" alt="Model 1 - Image 1"></td>
-            <td><img src="Programming/runs_compare1/detect/predict2/comparison_image1.jpeg" alt="Model 2 - Image 1"></td>
-            <td><img src="Programming/runs_compare1/detect/predict3/comparison_image1.jpeg" alt="Model 3 - Image 1"></td>
-            <td><img src="Programming/runs/detect/predict4/comparison_image1.jpeg" alt="Model 4 - Image 1"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict/comparison_image1.jpeg" alt="Model 1 - Image 1"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict2/comparison_image1.jpeg" alt="Model 2 - Image 1"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict3/comparison_image1.jpeg" alt="Model 3 - Image 1"></td>
+            <td><img src="Programming/train_test/runs/detect/predict4/comparison_image1.jpeg" alt="Model 4 - Image 1"></td>
         </tr>
         <tr>
             <th>2</th>
-            <td><img src="Programming/runs_compare1/detect/predict6/comparison_image2.jpeg" alt="Model 1 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict7/comparison_image2.jpeg" alt="Model 2 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict4/comparison_image2.jpeg" alt="Model 3 - Image 2"></td>
-            <td><img src="Programming/runs/detect/predict5/comparison_image2.jpeg" alt="Model 4 - Image 2"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict6/comparison_image2.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict7/comparison_image2.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict4/comparison_image2.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="Programming/train_test/runs/detect/predict5/comparison_image2.jpeg" alt="Model 4 - Image 2"></td>
         </tr>
         <tr>
             <th>3</th>
-            <td><img src="Programming/runs_compare1/detect/predict9/comparison_image3.jpeg" alt="Model 1 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict8/comparison_image3.jpeg" alt="Model 2 - Image 2"></td>
-            <td><img src="Programming/runs_compare1/detect/predict10/comparison_image3.jpeg" alt="Model 3 - Image 2"></td>
-            <td><img src="Programming/runs/detect/predict6/comparison_image3.jpeg" alt="Model 4 - Image 2"></td> 
+            <td><img src="Programming/train_test/runs_compare1/detect/predict9/comparison_image3.jpeg" alt="Model 1 - Image 2"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict8/comparison_image3.jpeg" alt="Model 2 - Image 2"></td>
+            <td><img src="Programming/train_test/runs_compare1/detect/predict10/comparison_image3.jpeg" alt="Model 3 - Image 2"></td>
+            <td><img src="Programming/train_test/runs/detect/predict6/comparison_image3.jpeg" alt="Model 4 - Image 2"></td> 
         </tr>
     </tbody>
 </table>
@@ -525,27 +542,27 @@ old way before table:
 
 Comparison image 1
 -using yolo11x.pt (biggest one, only going to do for image 1 cause not significantly different from 11s):
-<img src="runs/detect/predict11/comparison_image1.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict11/comparison_image1.jpeg" width="400">
 - using yolo11s.pt:
-<img src="runs/detect/predict/comparison_image1.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict/comparison_image1.jpeg" width="400">
 - using yolo11n.pt:
-<img src="runs/detect/predict2/comparison_image1.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict2/comparison_image1.jpeg" width="400">
 - using custom trained dataset on stuff in lab
-<img src="runs/detect/predict3/comparison_image1.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict3/comparison_image1.jpeg" width="400">
 
 Comparison image 2
 - using yolo11s.pt:
-<img src="runs/detect/predict6/comparison_image2.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict6/comparison_image2.jpeg" width="400">
 - using yolo11n.pt:
-<img src="runs/detect/predict7/comparison_image2.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict7/comparison_image2.jpeg" width="400">
 - using custom trained dataset on stuff in lab
-<img src="runs/detect/predict4/comparison_image2.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict4/comparison_image2.jpeg" width="400">
 
 Comparison image 3
 - using yolo11s.pt:
-<img src="runs/detect/predict9/comparison_image3.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict9/comparison_image3.jpeg" width="400">
 - using yolo11n.pt:
-<img src="runs/detect/predict8/comparison_image3.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict8/comparison_image3.jpeg" width="400">
 - using custom trained dataset on stuff in lab
-<img src="runs/detect/predict10/comparison_image3.jpeg" width="400">
+<img src="Programming/train_test/runs_compare1/detect/predict10/comparison_image3.jpeg" width="400">
 
