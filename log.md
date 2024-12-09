@@ -7,7 +7,9 @@ Logbook
 
 ![origami_worm_wiring_diagram.png](log_photos%2Forigami_worm_wiring_diagram.png)
 
-
+- created bill of materials
+- wrote up assembly instructions
+- pretty much done with [report/documentation](Origami Worm Robot Report and Documentation_FALL24.docx), might comment on main program
 
 12/07/2024
 ---
