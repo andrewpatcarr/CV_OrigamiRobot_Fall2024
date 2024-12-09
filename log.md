@@ -1,20 +1,28 @@
 Logbook
 ---
 ---
+12/08/2024
+---
+- created wiring diagram
+
+![origami_worm_wiring_diagram.png](log_photos%2Forigami_worm_wiring_diagram.png)
+
+
+
 12/07/2024
 ---
 - working on report/documentation
 - had to fix some paths for images on log that got off because I reorganized some files
 - tried new pad, pretty sure it is 25 degrees at 4 mm height. Works really well on carpet, going to try on rough outdoor surface
 
-will add videos soon
-[video of robot on carpet]
+
+[video of robot on carpet](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/EZ3gfSpz0YdHlWizx2pAg3gBb_xeV1YFyOWcL83Z5IEy0Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=CAm8it)
 
 - works on rough surface relatively well. Better than before for sure.
 
-[video on standard garage concrete]
+[video on standard garage concrete](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/EVyeC1qBWZ9LjJJ2trlWG6QBVoEVjFBpGhsD8ZwvbOOz0Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=EE4tMg)
 
-[video on rougher more irregular concrete]
+[video on rougher more irregular concrete](https://cpslo-my.sharepoint.com/:v:/g/personal/apcarr_calpoly_edu/EYgH6j8teHZAugXCq2LXksoB2CPt29aTcvvlFOFw1zrG9Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=G0bfJv)
 
 - one thing i realized during testing: there is a balance between angle of the pad, the stiffness of the teeth, and the surface. This balance changes the performance. if the angle is very small, the teeth won't grab. if the angle is too large, the teeth won't grab. if the teeth are too weak, they will just fall down and not grab. If they are too stiff, they will not grab. A rougher surface seems to always be a good thing. Should try on sand paper to see
 
