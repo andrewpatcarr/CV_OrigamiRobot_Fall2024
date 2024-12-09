@@ -9,7 +9,7 @@ Logbook
 
 - created bill of materials
 - wrote up assembly instructions
-- pretty much done with [report/documentation](Origami Worm Robot Report and Documentation_FALL24.docx), might comment on main program
+- pretty much done with [report/documentation](Origami%20Worm%20Robot%20Report%20and%20Documentation_FALL24.docx), might comment on main program
 
 12/07/2024
 ---
